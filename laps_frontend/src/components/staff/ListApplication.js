@@ -10,8 +10,18 @@ export default function ListApplication() {
     const [pendingApplicationList, updatePendingApplicationList] = useState([])
 
     useEffect(() => {
-        let currentloginuserID = 1;
-        
+
+        function getCookieValue(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        let currentloginuserID = getCookieValue('CurrentUserId');
+        //if (!currentloginuserID) 
+        //    currentloginuserID = 1;
+
+
         let config = {
             method: 'get',
             maxBodyLength: Infinity,

@@ -14,10 +14,10 @@ const Login = () => {
             const response = await axios.post('http://localhost:8080/api/login', values);
             console.log(response.data);
 
-            // 读取Cookie中的用户类型
+   
             const userType = getCookieValue('CurrentUserType');
-
-            // 根据用户类型跳转到相应界面
+            console.log(userType);
+        
             if (userType === 'ADMIN') {
                 navigate('/admin');
             } else {
@@ -28,7 +28,7 @@ const Login = () => {
         }
     };
 
-    // 辅助函数：从Cookie中获取值
+
     function getCookieValue(name) {
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);
@@ -44,7 +44,7 @@ const Login = () => {
                 onFinish={handleLogin}
             >
                 <Form.Item
-                    name="username"
+                    name="userId"
                     rules={[{ required: true, message: 'Please enter your username!' }]}
                 >
                     <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />

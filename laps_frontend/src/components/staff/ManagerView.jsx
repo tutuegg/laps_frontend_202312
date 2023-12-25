@@ -6,7 +6,15 @@ const ManagerView = () => {
     const [selectedEmployee, setSelectedEmployee] = useState(null);
     const [applications, setApplications] = useState([]);
  
-    let currentloginuserID = 1;
+    function getCookieValue(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    let currentloginuserID = getCookieValue('CurrentUserId');
+    //if (!currentloginuserID) 
+    //    currentloginuserID = 1;
  
     useEffect(() => {
         axios.get('http://localhost:8080/api/employee/get-subordinates-by-id/' + currentloginuserID)

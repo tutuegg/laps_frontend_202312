@@ -9,7 +9,16 @@ export default function ApplicationDetails() {
     let application_id = params.get('id');
     //console.log('application_id: ', application_id);
 
-    let currentloginuserID = 1;
+    
+    function getCookieValue(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    let currentloginuserID = getCookieValue('CurrentUserId');
+    //if (!currentloginuserID) 
+    //    currentloginuserID = 1;
 
 
     const [commentValue, setCommentValue] = useState("");

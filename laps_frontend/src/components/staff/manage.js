@@ -4,7 +4,20 @@ import { Card, Button, message, Popconfirm } from 'antd';
 
 const Manage = () => {
     const [historyList, setHistoryList] = useState([]);
-    const user_id = 1; // 注释掉
+    //const user_id = 1; // 注释掉
+
+    
+    function getCookieValue(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    let user_id = getCookieValue('CurrentUserId');
+    //if (!user_id) 
+    //    user_id = 1;
+
+
     useEffect(() => {
         // 获取数据
         axios.get(`http://localhost:8080/api/application/get-application-by-employee-id/${user_id}`)

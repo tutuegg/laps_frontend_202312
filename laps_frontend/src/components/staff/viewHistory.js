@@ -7,7 +7,18 @@ import React, { useState, useEffect } from 'react';
 
 const ViewHistory = () => {
     const [historyList, setHistoryList] = useState([]);
-    const user_id = 1; 
+    //const user_id = 1; 
+
+    
+    function getCookieValue(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    let user_id = getCookieValue('CurrentUserId');
+    //if (!user_id) 
+    //    user_id = 1;
 
     useEffect(() => {
         axios.get(`http://localhost:8080/api/application/get-application-by-employee-id/${user_id}`)
